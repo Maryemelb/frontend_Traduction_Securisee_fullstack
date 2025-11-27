@@ -18,6 +18,11 @@ export default function Register(){
          }})
          setUserName('')
          setPassword('')
+         if (!response.ok){
+            const errorData = await response.json();  // wait for the body
+            alert(errorData.detail|| "Operation Failed")
+            throw new Error(errorData.detail || "Operation Failed"); 
+         }
          return response.json()
      }
     return (

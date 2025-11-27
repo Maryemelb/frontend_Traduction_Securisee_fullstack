@@ -15,12 +15,18 @@ export default function Login(){
              password: password
          }),
          headers: {
-            "Content-Type": "application/json"
-                 }})
-         const data= response.json()
-         print(data)
-         localStorage.setItem('token', data)
-         return response.json()
+            "Content-Type": "application/json" 
+         }})
+         setUserName('')
+         setPassword('')
+         const data = await response.json();  // wait for the body
+         console.log(data)
+         localStorage.setItem('token',data)
+         if (!response.ok){
+            alert(data.detail|| "Operation Failed")
+            throw new Error(data.detail || "Operation Failed"); 
+         }
+         return data
      }
     return (
         <div>
